@@ -134,11 +134,11 @@ static int interfaceFontLoad(int font_index)
 
     // Fallback to original path
     if (stream == nullptr) {
-        snprintf(path, sizeof(path), "font%d.aaf", font_index);
+    snprintf(path, sizeof(path), "font%d.aaf", font_index);
         stream = fileOpen(path, "rb");
         if (stream == nullptr) {
-            return -1;
-        }
+        return -1;
+    }
     }
 
     int fileSize = fileGetSize(stream);
@@ -342,7 +342,7 @@ static void interfaceFontDrawImpl(unsigned char* buf, const char* string, int le
     }
 
     if ((color & FONT_SHADOW) != 0) {
-        color &= ~FONT_SHADOW;
+        color  &= ~FONT_SHADOW;
         // NOTE: Other font options preserved. This is different from text font
         // shadows.
         interfaceFontDrawImpl(buf + pitch + 1, string, length, pitch, (color & ~0xFF) | _colorTable[0]);

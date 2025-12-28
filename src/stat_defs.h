@@ -8,6 +8,8 @@ namespace fallout {
 
 // The maximum value of SPECIAL stat.
 #define PRIMARY_STAT_MAX (10)
+//cubik2k                	
+#define PRIMARY_STAT_MAX (20)
 
 // The number of values of SPECIAL stat.
 //
@@ -16,7 +18,9 @@ namespace fallout {
 #define PRIMARY_STAT_RANGE ((PRIMARY_STAT_MAX) - (PRIMARY_STAT_MIN) + 1)
 
 // The maximum number of PC level.
-#define PC_LEVEL_MAX 99
+//#define PC_LEVEL_MAX 99
+//cubik2k                	
+#define PC_LEVEL_MAX 199
 
 // Available stats.
 typedef enum Stat {

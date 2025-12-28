@@ -567,17 +567,30 @@ void critterUpdateDerivedStats(Object* critter)
     protoGetProto(critter->pid, &proto);
     CritterProtoData* data = &(proto->critter.data);
 
-    data->baseStats[STAT_MAXIMUM_HIT_POINTS] = critterGetBaseStatWithTraitModifier(critter, STAT_STRENGTH) + critterGetBaseStatWithTraitModifier(critter, STAT_ENDURANCE) * 2 + 15;
-    data->baseStats[STAT_MAXIMUM_ACTION_POINTS] = agility / 2 + 5;
-    data->baseStats[STAT_ARMOR_CLASS] = agility;
+    //data->baseStats[STAT_MAXIMUM_HIT_POINTS] = critterGetBaseStatWithTraitModifier(critter, STAT_STRENGTH) + critterGetBaseStatWithTraitModifier(critter, STAT_ENDURANCE) * 2 + 15;
+    //data->baseStats[STAT_MAXIMUM_ACTION_POINTS] = agility / 2 + 5;
+    //data->baseStats[STAT_ARMOR_CLASS] = agility;
+    //data->baseStats[STAT_MELEE_DAMAGE] = std::max(strength - 5, 1);
+    //data->baseStats[STAT_CARRY_WEIGHT] = 25 * strength + 25;
+    //data->baseStats[STAT_SEQUENCE] = 2 * perception;
+    //data->baseStats[STAT_HEALING_RATE] = std::max(endurance / 3, 1);
+    //data->baseStats[STAT_CRITICAL_CHANCE] = luck;
+    //data->baseStats[STAT_BETTER_CRITICALS] = 0;
+    //data->baseStats[STAT_RADIATION_RESISTANCE] = 2 * endurance;
+    //data->baseStats[STAT_POISON_RESISTANCE] = 5 * endurance;
+
+//cubik2k:
+    data->baseStats[STAT_MAXIMUM_HIT_POINTS] = critterGetBaseStatWithTraitModifier(critter, STAT_STRENGTH) + critterGetBaseStatWithTraitModifier(critter, STAT_ENDURANCE) * 3 + 25;
+    data->baseStats[STAT_MAXIMUM_ACTION_POINTS] = 2 * agility / 3 + 5;
+    data->baseStats[STAT_ARMOR_CLASS] = std::max(agility / 2, 1); // max 10
     data->baseStats[STAT_MELEE_DAMAGE] = std::max(strength - 5, 1);
-    data->baseStats[STAT_CARRY_WEIGHT] = 25 * strength + 25;
+    data->baseStats[STAT_CARRY_WEIGHT] = 25 * strength + 100;
     data->baseStats[STAT_SEQUENCE] = 2 * perception;
     data->baseStats[STAT_HEALING_RATE] = std::max(endurance / 3, 1);
-    data->baseStats[STAT_CRITICAL_CHANCE] = luck;
+    data->baseStats[STAT_CRITICAL_CHANCE] = luck / 2;
     data->baseStats[STAT_BETTER_CRITICALS] = 0;
-    data->baseStats[STAT_RADIATION_RESISTANCE] = 2 * endurance;
-    data->baseStats[STAT_POISON_RESISTANCE] = 5 * endurance;
+    data->baseStats[STAT_RADIATION_RESISTANCE] = std::max(endurance, 2); // max 20    
+    data->baseStats[STAT_POISON_RESISTANCE] = std::max(5 * endurance / 2, 5); // max 50
 }
 
 // 0x4AF854

@@ -280,6 +280,11 @@ typedef struct {
     int damageResistanceModifier; // d.dr_adjust
     int damageMultiplier; // d.dam_mult
     int damageDivisor; // d.dam_div
+    //cubik2k
+    int damageType; // d.dt           // trzeba dodać 4 bajty do plików pro ammo
+    int projectilePid; // d.proj_pid  // trzeba dodać 4 bajty do plików pro ammo
+    unsigned char soundCode; // d.sound_id
+    
 } ProtoItemAmmoData;
 
 typedef struct {

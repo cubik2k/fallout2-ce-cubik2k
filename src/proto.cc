@@ -412,7 +412,7 @@ int proto_item_subdata_init(Proto* proto, int type)
 
         proto->item.data.armor.perk = -1;
         proto->item.data.armor.maleFid = -1;
-        proto->item.data.armor.femaleFid = -1;
+        proto->item.data.armor.femaleFid = -1;        
         break;
     case ITEM_TYPE_CONTAINER:
         proto->item.data.container.openFlags = 0;
@@ -465,6 +465,10 @@ int proto_item_subdata_init(Proto* proto, int type)
         proto->item.data.ammo.damageResistanceModifier = 0;
         proto->item.data.ammo.damageMultiplier = 1;
         proto->item.data.ammo.damageDivisor = 1;
+        //cubik2k
+		proto->item.data.ammo.damageType = 0;
+		proto->item.data.ammo.projectilePid = -1;
+        proto->item.data.ammo.soundCode = 0;
         break;
     case ITEM_TYPE_MISC:
         proto->item.data.misc.powerTypePid = -1;
@@ -1559,7 +1563,7 @@ static int protoItemDataRead(ItemProtoData* item_data, int type, File* stream)
         if (fileReadInt32List(stream, item_data->armor.damageThreshold, 7) == -1) return -1;
         if (fileReadInt32(stream, &(item_data->armor.perk)) == -1) return -1;
         if (fileReadInt32(stream, &(item_data->armor.maleFid)) == -1) return -1;
-        if (fileReadInt32(stream, &(item_data->armor.femaleFid)) == -1) return -1;
+        if (fileReadInt32(stream, &(item_data->armor.femaleFid)) == -1) return -1;         
 
         return 0;
     case ITEM_TYPE_CONTAINER:
@@ -1608,7 +1612,10 @@ static int protoItemDataRead(ItemProtoData* item_data, int type, File* stream)
         if (fileReadInt32(stream, &(item_data->ammo.damageResistanceModifier)) == -1) return -1;
         if (fileReadInt32(stream, &(item_data->ammo.damageMultiplier)) == -1) return -1;
         if (fileReadInt32(stream, &(item_data->ammo.damageDivisor)) == -1) return -1;
-
+		//cubik2k:
+		if (fileReadInt32(stream, &(item_data->ammo.damageType)) == -1) return -1;
+		if (fileReadInt32(stream, &(item_data->ammo.projectilePid)) == -1) return -1;
+        if (fileReadUInt8(stream, &(item_data->ammo.soundCode)) == -1) return -1;
         return 0;
     case ITEM_TYPE_MISC:
         if (fileReadInt32(stream, &(item_data->misc.powerTypePid)) == -1) return -1;
@@ -1794,6 +1801,10 @@ static int protoItemDataWrite(ItemProtoData* item_data, int type, File* stream)
         if (fileWriteInt32(stream, item_data->ammo.damageResistanceModifier) == -1) return -1;
         if (fileWriteInt32(stream, item_data->ammo.damageMultiplier) == -1) return -1;
         if (fileWriteInt32(stream, item_data->ammo.damageDivisor) == -1) return -1;
+		//cubik2k:
+		if (fileWriteInt32(stream, item_data->ammo.damageType) == -1) return -1;
+		if (fileWriteInt32(stream, item_data->ammo.projectilePid) == -1) return -1;
+        if (fileReadUInt8(stream, &(item_data->ammo.soundCode)) == -1) return -1;
 
         return 0;
     case ITEM_TYPE_MISC:
@@ -1890,6 +1901,7 @@ static int protoWrite(Proto* proto, File* stream)
         if (fileWriteInt32(stream, proto->scenery.field_2C) == -1) return -1;
         if (fileWriteUInt8(stream, proto->scenery.field_34) == -1) return -1;
         if (protoSceneryDataWrite(&(proto->scenery.data), proto->scenery.type, stream) == -1) return -1;
+
     case OBJ_TYPE_WALL:
         if (fileWriteInt32(stream, proto->wall.lightDistance) == -1) return -1;
         if (_db_fwriteLong(stream, proto->wall.lightIntensity) == -1) return -1;

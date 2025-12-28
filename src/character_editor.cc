@@ -1404,6 +1404,16 @@ static int characterEditorWindowInit()
         // CHAR POINTS
         str = getmsg(&gCharacterEditorMessageList, &gCharacterEditorMessageListItem, 116);
         fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[18979]);
+        //cubik2k
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[14723]);
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[992]);
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[32747]);
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[31744]); // czerwony
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[32767]); // biały
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[32328]); // jasny czerwono-pomaranczowy
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[0]); // czarny
+        //fontDrawText(gCharacterEditorWindowBuffer + (286 * 640) + 14, str, 640, 640, _colorTable[21140]); // biało-jasno szary
+
         characterEditorDrawBigNumber(126, 282, 0, gCharacterEditorRemainingCharacterPoints, 0, gCharacterEditorWindow);
 
         // OPTIONS
@@ -1896,15 +1906,18 @@ void characterEditorInit()
     characterEditorSelectedItem = 0;
     gCharacterEditorCurrentSkill = 0;
     gCharacterEditorSkillValueAdjustmentSliderY = 27;
-    gCharacterEditorHasFreePerk = 0;
+    gCharacterEditorHasFreePerk = 0;    
     characterEditorWindowSelectedFolder = EDITOR_FOLDER_PERKS;
 
     for (i = 0; i < 2; i++) {
         gCharacterEditorTempTraits[i] = -1;
         gCharacterEditorOptionalTraitsBackup[i] = -1;
     }
-
-    gCharacterEditorRemainingCharacterPoints = 5;
+	
+	
+    //gCharacterEditorRemainingCharacterPoints = 5;
+    //cubik2k
+    gCharacterEditorRemainingCharacterPoints = 15;
     gCharacterEditorLastLevel = 1;
 }
 
@@ -2468,7 +2481,9 @@ static void characterEditorDrawPrimaryStat(int stat, bool animate, int previousV
             flags |= ANIMATE;
         }
 
-        if (value > 10) {
+//cubik2k                	
+        if (value > 20) {
+        //if (value > 10) {
             flags |= RED_NUMBERS;
         }
 
@@ -2477,8 +2492,12 @@ static void characterEditorDrawPrimaryStat(int stat, bool animate, int previousV
         blitBufferToBuffer(_editorBackgroundFrmImage.getData() + off, 40, fontGetLineHeight(), 640, gCharacterEditorWindowBuffer + off, 640);
 
         messageListItemId = critterGetStat(gDude, stat) + 199;
-        if (messageListItemId > 210) {
-            messageListItemId = 210;
+        //if (messageListItemId > 210) {
+        //    messageListItemId = 210;
+        //}
+//cubik2k        
+        if (messageListItemId > 220) {
+            messageListItemId = 220;
         }
 
         description = getmsg(&gCharacterEditorMessageList, &gCharacterEditorMessageListItem, messageListItemId);
@@ -3755,7 +3774,9 @@ static void characterEditorAdjustPrimaryStat(int eventCode)
             } else {
                 int previousValue = critterGetBaseStatWithTraitModifier(gDude, incrementingStat);
                 previousValue += critterGetBonusStat(gDude, incrementingStat);
-                if (gCharacterEditorRemainingCharacterPoints > 0 && previousValue < 10 && critterIncBaseStat(gDude, incrementingStat) == 0) {
+                //if (gCharacterEditorRemainingCharacterPoints > 0 && previousValue < 10 && critterIncBaseStat(gDude, incrementingStat) == 0) {
+                //cubik2k
+                if (gCharacterEditorRemainingCharacterPoints > 0 && previousValue < 20 && critterIncBaseStat(gDude, incrementingStat) == 0) {
                     gCharacterEditorRemainingCharacterPoints--;
                 } else {
                     cont = false;
@@ -3776,7 +3797,7 @@ static void characterEditorAdjustPrimaryStat(int eventCode)
             delay_ms(1000 / _repFtime - (getTicks() - _frame_time));
         } else {
             delay_ms(1000 / 24 - (getTicks() - _frame_time));
-        }
+            }
 
         renderPresent();
         sharedFpsLimiter.throttle();
@@ -5274,7 +5295,7 @@ static void characterEditorHandleAdjustSkillButtonPressed(int keyCode)
                 delay_ms(1000 / _repFtime - (getTicks() - _frame_time));
             } else {
                 delay_ms(1000 / 24 - (getTicks() - _frame_time));
-            }
+                }
 
             int keyCode = inputGetInput();
             if (keyCode != 522 && keyCode != 524 && rc != -1) {
@@ -5671,7 +5692,9 @@ int characterEditorLoad(File* stream)
 // 0x43C20C
 void characterEditorReset()
 {
-    gCharacterEditorRemainingCharacterPoints = 5;
+    //gCharacterEditorRemainingCharacterPoints = 5;
+    //cubik2k
+    gCharacterEditorRemainingCharacterPoints = 15;
     gCharacterEditorLastLevel = 1;
 }
 
@@ -6134,7 +6157,7 @@ static int perkDialogHandleInput(int count, void (*refreshProc)())
                         delay_ms(1000 / 24 - (getTicks() - _frame_time));
                     } else {
                         delay_ms(1000 / _repFtime - (getTicks() - _frame_time));
-                    }
+                        }
 
                     renderPresent();
                     sharedFpsLimiter.throttle();
@@ -6179,7 +6202,7 @@ static int perkDialogHandleInput(int count, void (*refreshProc)())
                             delay_ms(1000 / 24 - (getTicks() - _frame_time));
                         } else {
                             delay_ms(1000 / _repFtime - (getTicks() - _frame_time));
-                        }
+                            }
 
                         renderPresent();
                         sharedFpsLimiter.throttle();
@@ -6213,7 +6236,7 @@ static int perkDialogHandleInput(int count, void (*refreshProc)())
                             delay_ms(1000 / 24 - (getTicks() - _frame_time));
                         } else {
                             delay_ms(1000 / _repFtime - (getTicks() - _frame_time));
-                        }
+                            }
 
                         renderPresent();
                         sharedFpsLimiter.throttle();
@@ -6743,7 +6766,9 @@ static int _is_supper_bonus()
     for (int stat = 0; stat < 7; stat++) {
         int v1 = critterGetBaseStatWithTraitModifier(gDude, stat);
         int v2 = critterGetBonusStat(gDude, stat);
-        if (v1 + v2 > 10) {
+        //if (v1 + v2 > 10) {
+        //cubik2k
+        if (v1 + v2 > 20) {
             return 1;
         }
     }
