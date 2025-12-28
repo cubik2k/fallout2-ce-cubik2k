@@ -78,6 +78,7 @@
         },
         {
             "name": "linux-x86-debug",
+            "hidden": true,
             "inherits": [
                 "linux-x86-base"
             ],
@@ -87,6 +88,7 @@
         },
         {
             "name": "linux-x86-release",
+            "hidden": true,
             "inherits": [
                 "linux-x86-base"
             ],
@@ -96,6 +98,7 @@
         },
         {
             "name": "linux-x64-debug",
+            "hidden": true,
             "inherits": [
                 "linux-base"
             ],
@@ -105,6 +108,7 @@
         },
         {
             "name": "linux-x64-release",
+            "hidden": true,
             "inherits": [
                 "linux-base"
             ],

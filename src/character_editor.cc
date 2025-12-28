@@ -5718,7 +5718,7 @@ static int characterEditorUpdateLevel()
                 }
             }
             if (sp > 99) {
-                sp = 99;
+                sp = 99; // ograniczenie ilości nowych skill points do rozdysponowania; TODO: zwiększyć do 199, ale trzeba okienko w oknie postaci zmienić na 3 pozycje bo oryginalnie są na 2 pozycje 
             }
 
             pcSetStat(PC_STAT_UNSPENT_SKILL_POINTS, sp);
