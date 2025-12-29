@@ -2557,7 +2557,8 @@ static int wmAreaInit()
     }
 
     configFree(&cfg);
-
+    
+    //cubik2k: TODO: 29.12.2025 - disable for future city/maps modding!!!
     if (wmMaxAreaNum != CITY_COUNT) {
         showMesageBox("\nwmAreaInit::Error loading Cities!");
         exit(1);
