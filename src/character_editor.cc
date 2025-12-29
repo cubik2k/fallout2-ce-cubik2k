@@ -1917,7 +1917,7 @@ void characterEditorInit()
 	
     //gCharacterEditorRemainingCharacterPoints = 5;
     //cubik2k
-    gCharacterEditorRemainingCharacterPoints = 15;
+    gCharacterEditorRemainingCharacterPoints = MAX_CHAR_POINTS;
     gCharacterEditorLastLevel = 1;
 }
 
@@ -2481,9 +2481,9 @@ static void characterEditorDrawPrimaryStat(int stat, bool animate, int previousV
             flags |= ANIMATE;
         }
 
-//cubik2k                	
-        if (value > 20) {
+//cubik2k: max value of PRIMARY_STAT_MAX
         //if (value > 10) {
+        if (value > PRIMARY_STAT_MAX) {        
             flags |= RED_NUMBERS;
         }
 
@@ -2495,9 +2495,9 @@ static void characterEditorDrawPrimaryStat(int stat, bool animate, int previousV
         //if (messageListItemId > 210) {
         //    messageListItemId = 210;
         //}
-//cubik2k        
-        if (messageListItemId > 220) {
-            messageListItemId = 220;
+//cubik2k : descriptions numbers of PRIMARY_STAT in editor.msg; editor.msg modified!
+        if (messageListItemId > 215) {
+            messageListItemId = 215;
         }
 
         description = getmsg(&gCharacterEditorMessageList, &gCharacterEditorMessageListItem, messageListItemId);
@@ -2508,8 +2508,12 @@ static void characterEditorDrawPrimaryStat(int stat, bool animate, int previousV
         blitBufferToBuffer(_editorBackgroundFrmImage.getData() + off, 40, fontGetLineHeight(), 640, gCharacterEditorWindowBuffer + off, 640);
 
         value = critterGetStat(gDude, stat);
-        if (value > 10) {
-            value = 10;
+        // cubik2k: max value of PRIMARY_STAT is PRIMARY_STAT_MAX
+        //if (value > 10) {
+        //    value = 10;
+        //}
+        if (value > PRIMARY_STAT_MAX) {
+            value = PRIMARY_STAT_MAX;
         }
 
         description = statGetValueDescription(value);

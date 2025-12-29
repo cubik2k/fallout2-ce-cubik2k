@@ -2,14 +2,17 @@
 #define STAT_DEFS
 
 namespace fallout {
+// cubik2k: added new const MAX_CHAR_POINTS; original value is 5 stat points for adjust primary stats for new character
+//#define MAX_CHAR_POINTS (5)
+#define MAX_CHAR_POINTS (15)
 
 // The minimum value of SPECIAL stat.
 #define PRIMARY_STAT_MIN (1)
 
 // The maximum value of SPECIAL stat.
 //#define PRIMARY_STAT_MAX (10)
-//cubik2k                	
-#define PRIMARY_STAT_MAX (20)
+//cubik2k: value of PRIMARY_STAT can be max 15
+#define PRIMARY_STAT_MAX (15)
 
 // The number of values of SPECIAL stat.
 //
