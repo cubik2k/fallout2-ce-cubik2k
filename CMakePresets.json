@@ -134,12 +134,14 @@
         },
         {
             "name": "macos",
+            "hidden": true,
             "inherits": [
                 "darwin-base"
             ]
         },
         {
             "name": "ios",
+            "hidden": true,
             "inherits": [
                 "darwin-base"
             ],
@@ -151,6 +153,7 @@
     "buildPresets": [
         {
             "name": "windows-x86-debug",
+            "hidden": true,
             "configurePreset": "windows-x86",
             "configuration": "Debug"
         },
@@ -161,6 +164,7 @@
         },
         {
             "name": "windows-x64-debug",
+            "hidden": true,
             "configurePreset": "windows-x64",
             "configuration": "Debug"
         },
@@ -171,32 +175,39 @@
         },
         {
             "name": "linux-x86-debug",
+            "hidden": true,
             "configurePreset": "linux-x86-debug"
         },
         {
             "name": "linux-x86-release",
+            "hidden": true,
             "configurePreset": "linux-x86-release"
         },
         {
             "name": "linux-x64-debug",
+            "hidden": true,
             "configurePreset": "linux-x64-debug"
         },
         {
             "name": "linux-x64-release",
+            "hidden": true,
             "configurePreset": "linux-x64-release"
         },
         {
             "name": "macos-debug",
+            "hidden": true,
             "configurePreset": "macos",
             "configuration": "Debug"
         },
         {
             "name": "macos-release",
+            "hidden": true,
             "configurePreset": "macos",
             "configuration": "RelWithDebInfo"
         },
         {
             "name": "ios-debug",
+            "hidden": true,
             "configurePreset": "ios",
             "configuration": "Debug"
         },
