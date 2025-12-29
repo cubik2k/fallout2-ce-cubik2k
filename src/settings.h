@@ -23,6 +23,7 @@ struct SystemSettings {
     int splash = 0;
     int free_space = 20480;
     int times_run = 0;
+    int skip_intro_movies = 0;
 };
 
 struct PreferencesSettings {

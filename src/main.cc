@@ -82,13 +82,18 @@ int falloutMain(int argc, char** argv)
         return 1;
     }
 
+    // CUBIK2K: Allow to skip splash screen
+    int skip_intro_movies = settings.system.skip_intro_movies;
+
     // SFALL: Allow to skip intro movies
     int skipOpeningMovies;
     configGetInt(&gSfallConfig, SFALL_CONFIG_MISC_KEY, SFALL_CONFIG_SKIP_OPENING_MOVIES_KEY, &skipOpeningMovies);
     if (skipOpeningMovies < 1) {
-        gameMoviePlay(MOVIE_IPLOGO, GAME_MOVIE_FADE_IN);
-        gameMoviePlay(MOVIE_INTRO, 0);
-        gameMoviePlay(MOVIE_CREDITS, 0);
+        if (skip_intro_movies == 0) {
+            gameMoviePlay(MOVIE_IPLOGO, GAME_MOVIE_FADE_IN);
+            gameMoviePlay(MOVIE_INTRO, 0);
+            gameMoviePlay(MOVIE_CREDITS, 0);
+        }
     }
 
     if (mainMenuWindowInit() == 0) {

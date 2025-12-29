@@ -27,6 +27,7 @@ namespace fallout {
 #define GAME_CONFIG_CYCLE_SPEED_FACTOR_KEY "cycle_speed_factor"
 #define GAME_CONFIG_HASHING_KEY "hashing"
 #define GAME_CONFIG_SPLASH_KEY "splash"
+#define GAME_CONFIG_SKIP_INTRO_MOVIES_KEY "skip_intro_movies"
 #define GAME_CONFIG_FREE_SPACE_KEY "free_space"
 #define GAME_CONFIG_TIMES_RUN_KEY "times_run"
 #define GAME_CONFIG_GAME_DIFFICULTY_KEY "game_difficulty"
