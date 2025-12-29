@@ -250,7 +250,8 @@ static unsigned char* gInterfaceWindowBuffer;
 // This buffer is initialized once and does not change throughout the game.
 //
 // 0x59D40C
-static unsigned char gInterfaceActionPointsBarBackground[90 * 5];
+//static unsigned char gInterfaceActionPointsBarBackground[90 * 5];
+static unsigned char gInterfaceActionPointsBarBackground[90 * 6];
 
 // Should the game window stretch all the way to the bottom or sit at the top of the interface bar (default)
 bool gInterfaceBarMode = false;
@@ -306,7 +307,8 @@ int interfaceInit()
 
     customInterfaceBarInit();
 
-    gInterfaceBarActionPointsBarRect = { 316 + gInterfaceBarContentOffset, 14, 406 + gInterfaceBarContentOffset, 19 };
+    //gInterfaceBarActionPointsBarRect = { 316 + gInterfaceBarContentOffset, 14, 406 + gInterfaceBarContentOffset, 19 };
+    gInterfaceBarActionPointsBarRect = { 300 + gInterfaceBarContentOffset, 14, 422 + gInterfaceBarContentOffset, 19 };
     gInterfaceBarEndButtonsRect = { 580 + gInterfaceBarContentOffset, 38, 637 + gInterfaceBarContentOffset, 96 };
     gInterfaceBarMainActionRect = { 267 + gInterfaceBarContentOffset, 26, 455 + gInterfaceBarContentOffset, 93 };
 
@@ -558,7 +560,8 @@ int interfaceInit()
         return intface_fatal_error(-1);
     }
 
-    blitBufferToBuffer(gInterfaceWindowBuffer + gInterfaceBarWidth * 14 + 316 + gInterfaceBarContentOffset, 90, 5, gInterfaceBarWidth, gInterfaceActionPointsBarBackground, 90);
+    //blitBufferToBuffer(gInterfaceWindowBuffer + gInterfaceBarWidth * 14 + 316 + gInterfaceBarContentOffset, 90, 5, gInterfaceBarWidth, gInterfaceActionPointsBarBackground, 90);
+    blitBufferToBuffer(gInterfaceWindowBuffer + gInterfaceBarWidth * 14 + 300 + gInterfaceBarContentOffset, 122, 5, gInterfaceBarWidth, gInterfaceActionPointsBarBackground, 122);
 
     if (indicatorBarInit() == -1) {
         // NOTE: Uninline.
@@ -966,11 +969,12 @@ void interfaceRenderActionPoints(int actionPointsLeft, int bonusActionPoints)
         return;
     }
 
-    blitBufferToBuffer(gInterfaceActionPointsBarBackground, 90, 5, 90, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + gInterfaceBarContentOffset + 316, gInterfaceBarWidth);
-
+    //blitBufferToBuffer(gInterfaceActionPointsBarBackground, 90, 5, 90, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + gInterfaceBarContentOffset + 316, gInterfaceBarWidth);
+    blitBufferToBuffer(gInterfaceActionPointsBarBackground, 122, 5, 122, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + gInterfaceBarContentOffset + 300, gInterfaceBarWidth);
+        
     if (actionPointsLeft == -1) {
         frmData = _redLightFrmImage.getData();
-        actionPointsLeft = 10;
+        actionPointsLeft = 20; //10;
         bonusActionPoints = 0;
     } else {
         frmData = _greenLightFrmImage.getData();
@@ -979,13 +983,13 @@ void interfaceRenderActionPoints(int actionPointsLeft, int bonusActionPoints)
             actionPointsLeft = 0;
         }
 
-        if (actionPointsLeft > 10) {
-            actionPointsLeft = 10;
+        if (actionPointsLeft > 20) { //if (actionPointsLeft > 10) {
+            actionPointsLeft = 20; //10;
         }
 
         if (bonusActionPoints >= 0) {
-            if (actionPointsLeft + bonusActionPoints > 10) {
-                bonusActionPoints = 10 - actionPointsLeft;
+            if (actionPointsLeft + bonusActionPoints > 20) {  //if (actionPointsLeft + bonusActionPoints > 10) {
+                bonusActionPoints = 20 - actionPointsLeft; //bonusActionPoints = 10 - actionPointsLeft;
             }
         } else {
             bonusActionPoints = 0;
@@ -994,11 +998,13 @@ void interfaceRenderActionPoints(int actionPointsLeft, int bonusActionPoints)
 
     int index;
     for (index = 0; index < actionPointsLeft; index++) {
-        blitBufferToBuffer(frmData, 5, 5, 5, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + 316 + index * 9 + gInterfaceBarContentOffset, gInterfaceBarWidth);
+        //blitBufferToBuffer(frmData, 5, 5, 5, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + 316 + index * 9 + gInterfaceBarContentOffset, gInterfaceBarWidth);
+        blitBufferToBuffer(frmData, 5, 5, 5, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + gInterfaceBarContentOffset + 300 + index * 6, gInterfaceBarWidth);
     }
 
     for (; index < (actionPointsLeft + bonusActionPoints); index++) {
-        blitBufferToBuffer(_yellowLightFrmImage.getData(), 5, 5, 5, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + 316 + gInterfaceBarContentOffset + index * 9, gInterfaceBarWidth);
+        //blitBufferToBuffer(_yellowLightFrmImage.getData(), 5, 5, 5, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + 316 + index * 9 + gInterfaceBarContentOffset, gInterfaceBarWidth);
+        blitBufferToBuffer(_yellowLightFrmImage.getData(), 5, 5, 5, gInterfaceWindowBuffer + 14 * gInterfaceBarWidth + gInterfaceBarContentOffset + 300 + index * 6, gInterfaceBarWidth);
     }
 
     if (!gInterfaceBarInitialized) {

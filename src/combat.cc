@@ -3214,6 +3214,16 @@ static void _combat_set_move_all()
 
         int actionPoints = critterGetStat(object, STAT_MAXIMUM_ACTION_POINTS);
 
+        // 29.12.2025:cubik2k: aaccumulate action points left after last turn for the player character, max 20; 
+        //TODO: do it as Perk
+        if (object == gDude) {
+            actionPoints = critterGetStat(object, STAT_MAXIMUM_ACTION_POINTS) + gDude->data.critter.combat.ap;
+
+            if (actionPoints > 20) {
+                actionPoints = 20;
+            }
+        }        
+
         if (_gcsd) {
             actionPoints += _gcsd->actionPointsBonus;
         }
@@ -5393,30 +5403,33 @@ void _combat_anim_finished()
 }
 
 // 0x425FBC
-static void _combat_standup(Object* a1)
+static void _combat_standup(Object* attacker)
 {
     int v2;
 
     v2 = 3;
-    if (a1 == gDude && perkGetRank(a1, PERK_QUICK_RECOVERY)) {
+    if (attacker == gDude && perkGetRank(attacker, PERK_QUICK_RECOVERY)) {
         v2 = 1;
     }
 
-    if (v2 > a1->data.critter.combat.ap) {
-        a1->data.critter.combat.ap = 0;
+    if (v2 > attacker->data.critter.combat.ap) {
+        attacker->data.critter.combat.ap = 0;
     } else {
-        a1->data.critter.combat.ap -= v2;
+        attacker->data.critter.combat.ap -= v2;
     }
 
-    if (a1 == gDude) {
+    if (attacker == gDude) {
         interfaceRenderActionPoints(gDude->data.critter.combat.ap, _combat_free_move);
     }
 
-    _dude_standup(a1);
+    _dude_standup(attacker);
 
     // NOTE: Uninline.
     _combat_turn_run();
 }
+
+
+
 
 // Render two digits.
 //
